@@ -348,8 +348,8 @@ void TexelCoordToVect(int32 a_FaceIdx, float32 a_U, float32 a_V, int32 a_Size, f
 		float32 NumLevel = (logf(min(a_Size, 128))  / logf(2)) - 1;
 		AngleNormalEdge = LERP(0.5 * AngleNormalEdge, AngleNormalEdge, 1.0f - (NumLevel/6) );
 
-		float32 factorU = abs((2.0f * ((float32)a_U) / (float32)(a_Size - 1) ) - 1.0f);
-		float32 factorV = abs((2.0f * ((float32)a_V) / (float32)(a_Size - 1) ) - 1.0f);
+		float32 factorU = fabs((2.0f * ((float32)a_U) / (float32)(a_Size - 1) ) - 1.0f);
+		float32 factorV = fabs((2.0f * ((float32)a_V) / (float32)(a_Size - 1) ) - 1.0f);
 		AngleNormalEdge = LERP(0.0f, AngleNormalEdge, max(factorU, factorV) );
 
 		// Get current vector

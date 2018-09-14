@@ -42,3 +42,4 @@ local.properties
 ## Build Generated ##
 lib/*
 bin/*
+.vs/
