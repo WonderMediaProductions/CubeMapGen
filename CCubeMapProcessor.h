@@ -654,7 +654,7 @@ public:
    // Gets the current filtering progress string 
    //
    //==========================================================================================================
-   WCHAR *GetFilterProgressString(void);
+   WCHAR *GetFilterProgressString(bool compact = false);
 
 
    //==========================================================================================================

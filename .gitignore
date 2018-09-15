@@ -43,3 +43,4 @@ local.properties
 lib/*
 bin/*
 .vs/
+*.aps
