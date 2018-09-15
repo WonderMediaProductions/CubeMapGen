@@ -1,0 +1,1 @@
+-CosinePowerMipmapChainMode:Mipmap -LightingModel:BlinnBRDF -exportPixelFormat:A16B16G16R16F -exit -exportCubeDDS -exportMipChain -numFilterThreads:6 -edgeFixupTech:Stretch -GlossScale:10 -GlossBias:1

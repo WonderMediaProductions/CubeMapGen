@@ -652,7 +652,6 @@ void ProcessCommandLineArguements(void)
 	HWND progressDialogWnd; //progress dialog for running in HDRShopMode
 	WCHAR outputStr[4096];
 
-	int32 iCmdLine;
 	WCHAR *cmdArg;
 	WCHAR *suffixStr;
 	HANDLE consoleStdErr = NULL;  //console std out handle
@@ -733,23 +732,35 @@ void ProcessCommandLineArguements(void)
 
 	LPWSTR* argList = mainArgList;
 
-	if (argCount == 2 && argList[1][0] == '@')
+	// Add arguments from a file if the first argument starts with @, followed by the path
+	if (argCount >= 2 && argList[1][0] == '@')
 	{
 		// Read the arguments from a file
 		FILE *f = nullptr;
 		auto error = _wfopen_s(&f, argList[1] + 1, L"r");
 		if (error == 0)
 		{
-			argList = argValuePtrs;
-			argList[0] = mainArgList[0];
+			// override argument list
+			argValuePtrs[0] = mainArgList[0];
 
+			// remove the @ argument
+			argCount -= 1;
+
+			// copy all other arguments
+			for (int i=1; i<argCount; ++i)
+			{
+				argValuePtrs[i] = mainArgList[i + 1];
+			}
+
+			argList = argValuePtrs;
+
+			// load extra arguments from file.
 			char argsFileBuffer[4096];
 			fread(argsFileBuffer, 4096, sizeof(char), f);
 			fclose(f);
 
 			char* nextToken;
 			char* token = strtok_s(argsFileBuffer, " ", &nextToken);
-			argCount = 1;
 
 			WCHAR* argFilePtr = argsValueBuffer;
 
@@ -764,7 +775,7 @@ void ProcessCommandLineArguements(void)
 
 	//iterate over command line arguments, note that g_pArgVList[0]
 	// contains the executable filename, so the list of options start at 1
-	for (iCmdLine = 1; (iCmdLine < argCount); iCmdLine++)
+	for (int32 iCmdLine = 1; (iCmdLine < argCount); iCmdLine++)
 	{
 		cmdArg = argList[iCmdLine];
 
