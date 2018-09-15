@@ -293,7 +293,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="glTF_PBR_args.txt" />
+    <Text Include="glTF_PBR_diff_args.txt" />
+    <Text Include="glTF_PBR_spec_args.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

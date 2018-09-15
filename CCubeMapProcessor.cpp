@@ -3133,7 +3133,9 @@ void CCubeMapProcessor::FilterCubeMapMipChainMultithread(float32 a_BaseFilterAng
 )
 {
 	// First, take count of the lighting model to modify SpecularPower
-	float32 RefSpecularPower = (a_MCO.LightingModel == CP_LIGHTINGMODEL_BLINN || a_MCO.LightingModel == CP_LIGHTINGMODEL_BLINN_BRDF) ? a_MCO.SpecularPower / GetSpecularPowerFactorToMatchPhong(a_MCO.SpecularPower) : a_MCO.SpecularPower;
+	float32 RefSpecularPower = (a_MCO.LightingModel == CP_LIGHTINGMODEL_BLINN || a_MCO.LightingModel == CP_LIGHTINGMODEL_BLINN_BRDF) 
+	? a_MCO.SpecularPower / GetSpecularPowerFactorToMatchPhong(a_MCO.SpecularPower) 
+	: a_MCO.SpecularPower;
 
 	//Cone angle start (for generating subsequent mip levels)
 	float32 coneAngle = a_InitialMipAngle;
@@ -3151,7 +3153,9 @@ void CCubeMapProcessor::FilterCubeMapMipChainMultithread(float32 a_BaseFilterAng
 			// This function must match the decompression function of the engine.
 			specularPower = powf(2.0f, a_MCO.GlossScale * Glossiness + a_MCO.GlossBias);
 			// take count of the lighting model
-			specularPower = (a_MCO.LightingModel == CP_LIGHTINGMODEL_BLINN || a_MCO.LightingModel == CP_LIGHTINGMODEL_BLINN_BRDF) ? specularPower / GetSpecularPowerFactorToMatchPhong(specularPower) : specularPower;
+			specularPower = (a_MCO.LightingModel == CP_LIGHTINGMODEL_BLINN || a_MCO.LightingModel == CP_LIGHTINGMODEL_BLINN_BRDF) 
+				? specularPower / GetSpecularPowerFactorToMatchPhong(specularPower) 
+				: specularPower;
 		}
 
 		// TODO : Write a function to copy and scale the base mipmap in output
